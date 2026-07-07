@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from app.api.analyze import router as analyze_router
+from app.api.advanced_features import router as advanced_features_router
 from app.api.ask import router as ask_router
 from app.api.conversation import router as conversation_router
 from app.api.confidence import router as confidence_router
@@ -33,6 +34,7 @@ app.include_router(confidence_router)
 app.include_router(cross_check_router)
 app.include_router(terminology_router)
 app.include_router(prioritization_router)
+app.include_router(advanced_features_router)
 app.include_router(voice_router)
 
 @app.get("/")
