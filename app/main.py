@@ -15,6 +15,7 @@ from app.api.terminology import router as terminology_router
 from app.api.upload import router as upload_router
 from app.api.process import router as process_router
 from app.api.voice import router as voice_router
+from app.api.retrieve_answer import router as retrieve_answer_router 
 app = FastAPI(
     title="ElderDocAI",
     description="AI-powered document understanding service for elderly users.",
@@ -36,7 +37,7 @@ app.include_router(terminology_router)
 app.include_router(prioritization_router)
 app.include_router(advanced_features_router)
 app.include_router(voice_router)
-
+app.include_router(retrieve_answer_router)
 @app.get("/")
 async def root():
     return {

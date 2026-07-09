@@ -3,7 +3,7 @@ import os
 
 import ollama
 
-MODEL_NAME = "llama3"
+MODEL_NAME = "llama3.2:3b"
 PROCESSED_FOLDER = "processed_documents"
 
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)

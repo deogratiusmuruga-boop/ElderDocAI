@@ -54,14 +54,28 @@ async def retrieve(query: str):
     return {"success": True, "results": vector_store.search(query)}
 
 
-@router.post("/reminders")
-async def reminders(payload: dict):
+@router.post("/reminders/{document_id}")
+async def reminders(document_id: str):
     """
-    Generate reminder candidates from extracted text.
+    Generate reminder candidates from a processed document.
     """
 
-    text = payload.get("text", "")
-    if not isinstance(text, str) or not text.strip():
-        raise HTTPException(status_code=400, detail="Text cannot be empty.")
+    file_path = os.path.join(PROCESSED_FOLDER, f"{document_id}.txt")
 
-    return {"success": True, "reminders": generate_reminders(text)}
+    if not os.path.exists(file_path):
+        raise HTTPException(
+            status_code=404,
+            detail="Processed document not found."
+        )
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        text = file.read()
+
+    reminders = generate_reminders(text)
+
+    return {
+        "success": True,
+        "document_id": document_id,
+        "total_reminders": len(reminders),
+        "reminders": reminders
+    }

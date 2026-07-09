@@ -1,6 +1,24 @@
+# Virtual environment
 venv/
+
+# Python
 __pycache__/
-uploaded_documents/
-vector_db/
 *.pyc
+
+# Environment variables
 .env
+
+# Uploaded and generated files
+uploaded_documents/
+processed_documents/
+
+# Local vector index
+vector_db/
+
+# IDE
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db

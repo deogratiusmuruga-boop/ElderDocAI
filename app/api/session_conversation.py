@@ -11,7 +11,10 @@ PROCESSED_FOLDER = "processed_documents"
 
 
 @router.post("/session-conversation/{document_id}/{session_id}")
-async def session_conversation(document_id: str, session_id: str, question: str):
+async def session_conversation(
+    document_id: str, 
+    session_id: str, 
+    question: str):
     """
     Answer a question using the processed document and the stored conversation history.
     """

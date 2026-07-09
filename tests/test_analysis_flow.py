@@ -33,7 +33,7 @@ def test_analyze_document_saves_json_and_returns_result(tmp_path, monkeypatch):
     )
 
     monkeypatch.setattr(analysis_service, "PROCESSED_FOLDER", str(processed_dir))
-    monkeypatch.setattr(analysis_service, "MODEL_NAME", "llama3")
+    monkeypatch.setattr(analysis_service, "MODEL_NAME", "llama3.2:3b")
     monkeypatch.setattr(analysis_service, "ollama", DummyOllama())
 
     result = analysis_service.analyze_document(

@@ -2,7 +2,7 @@ import json
 
 import ollama
 
-MODEL_NAME = "llama3"
+MODEL_NAME = "llama3.2:3b"
 
 
 def ask_with_context(processed_file_path: str, question: str, history: list):
