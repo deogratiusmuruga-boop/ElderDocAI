@@ -2,6 +2,7 @@ import os
 
 from app.services.pdf_parser import extract_text_from_pdf
 from app.services.text_cleaner import clean_text
+from app.services.retrieval_service import vector_store
 
 PROCESSED_FOLDER = "processed_documents"
 
@@ -15,10 +16,10 @@ def process_document(file_path: str):
     if extension != ".pdf":
         raise ValueError("Unsupported document type.")
 
-    # Extract
+    # Extract text from PDF
     extracted_text = extract_text_from_pdf(file_path)
 
-    # Clean
+    # Clean extracted text
     cleaned_text = clean_text(extracted_text)
 
     # Same UUID as uploaded file
@@ -29,8 +30,15 @@ def process_document(file_path: str):
         f"{document_id}.txt"
     )
 
+    # Save processed text
     with open(output_path, "w", encoding="utf-8") as file:
         file.write(cleaned_text)
+
+    # Add processed document to retrieval store
+    vector_store.add_document(
+        document_id,
+        cleaned_text
+    )
 
     return {
         "document_id": document_id,
